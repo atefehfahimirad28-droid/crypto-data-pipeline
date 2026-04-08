@@ -109,7 +109,7 @@ crypto-data-pipeline/
 
 1. Clone Repository
 
-git clone https://github.com/YOUR_USERNAME/crypto-data-pipeline.git
+git clone https://github.com/atefehfahimirad28-droid/crypto-data-pipeline.git
 cd crypto-data-pipeline
 
 ---
