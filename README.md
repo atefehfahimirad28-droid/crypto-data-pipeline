@@ -29,17 +29,20 @@ The pipeline is designed with a data engineering mindset, focusing on clean arch
 
 ---
 
-🏗️ System Architecture
+## 🏗️ Architecture
 
-The pipeline follows a structured batch-processing workflow:
+### Pipeline Flow
 
+```text
 CoinGecko API
       ↓
-Extract (Python + Requests)
+extract_crypto.py
       ↓
-Transform (Pandas)
+transform_crypto.py
       ↓
-Load (PostgreSQL)
+load_crypto.py
+      ↓
+PostgreSQL (crypto_prices table)
 
 ---
 
