@@ -1,404 +1,107 @@
-🚀 Crypto Data Pipeline (ETL with Docker & PostgreSQL)
-
-
-
-"Python" (https://img.shields.io/badge/python-3.9+-blue.svg)
-
-"Docker" (https://img.shields.io/badge/docker-%230db7ed.svg)
-
-"PostgreSQL" (https://img.shields.io/badge/PostgreSQL-316192.svg)
-
-"Pandas" (https://img.shields.io/badge/pandas-%23150458.svg)
-
-
-
----
-
-
-
+Crypto Data Pipeline (ETL with Docker & PostgreSQL)
 📌 Overview
-
-
-
-This project implements a modular ETL (Extract, Transform, Load) pipeline for collecting cryptocurrency market data from the CoinGecko API and storing it in a PostgreSQL database.
-
-
+This project implements a modular ETL (Extract, Transform, Load) pipeline for collecting real-time cryptocurrency market data from the CoinGecko API and storing it in a PostgreSQL database.
 
 The pipeline is designed with a data engineering mindset, focusing on clean architecture, reproducibility, and containerized execution using Docker.
 
-
-
----
-
-
-
 🧠 Key Features
+Modular ETL Pipeline: Clear separation between Extraction, Transformation, and Loading logic.
 
+API Ingestion: Real-time data fetching using Python Requests.
 
+Data Processing: Cleaning and normalization using Pandas.
 
-- Modular ETL pipeline (Extract / Transform / Load separation)
+Relational Storage: Structured data storage in PostgreSQL.
 
-- API data ingestion using Python (Requests)
+Containerization: Fully orchestrated environment using Docker Compose.
 
-- Data cleaning and transformation with Pandas
-
-- Relational storage in PostgreSQL
-
-- Fully containerized environment using Docker Compose
-
-- Configurable environment using ".env"
-
-
-
----
-
-
+Security: Configurable environment variables via .env files.
 
 🏗️ System Architecture
-
-
-
 The pipeline follows a structured batch-processing workflow:
 
+Extract: Fetch cryptocurrency data from CoinGecko API (JSON format).
 
+Transform: Normalize data, handle missing values, and structure it into tabular format using Pandas.
 
-CoinGecko API
-
-↓
-
-Extract (Python + Requests)
-
-↓
-
-Transform (Pandas)
-
-↓
-
-Load (PostgreSQL)
-
-
-
----
-
-
+Load: Upsert/Insert data into the PostgreSQL crypto_prices table.
 
 🐳 Docker Architecture
+The application runs in isolated containers within a shared bridge network:
 
+crypto_app: The Python environment that executes the ETL scripts.
 
+crypto_postgres: The database engine for persistent storage.
 
-The application runs in isolated containers:
-
-
-
-Services:
-
-
-
-- "crypto_app" → Executes ETL pipeline
-
-- "crypto_postgres" → PostgreSQL database
-
-
-
-Network:
-
-
-
-- Bridge network for inter-container communication
-
-
-
-Volumes:
-
-
-
-- Persistent storage for database data
-
-
-
----
-
-
-
-🔄 Data Pipeline Flow
-
-
-
-1. Extract
-
-
-- Fetch cryptocurrency data from CoinGecko API
-
-- Handle API responses (JSON format)
-
-
-
-2. Transform
-
-
-- Normalize and clean data
-
-- Convert into structured tabular format
-
-
-
-3. Load
-
-
-- Insert data into PostgreSQL table
-
-- Ensure consistent schema
-
-
-
----
-
-
+Volumes: Dedicated Docker volumes to ensure data persists even after container restarts.
 
 📂 Project Structure
-
-
-
+Plaintext
 crypto-data-pipeline/
-
 ├── scripts/
-
-│ ├── extract.py
-
-│ ├── transform.py
-
-│ ├── load.py
-
-│ └── main.py
-
+│   ├── extract.py      # API fetching logic
+│   ├── transform.py    # Data cleaning & Pandas logic
+│   ├── load.py         # Database insertion logic
+│   └── main.py         # Pipeline orchestrator
 ├── config/
-
-│ └── db_config.py
-
-├── .env.example
-
-├── docker-compose.yml
-
-├── Dockerfile
-
-└── requirements.txt
-
-
-
----
-
-
-
+│   └── db_config.py    # Database connection settings
+├── .env.example        # Template for environment variables
+├── docker-compose.yml  # Docker services configuration
+├── Dockerfile          # Python environment definition
+└── requirements.txt    # Python dependencies
 ⚙️ Setup & Execution
-
-
-
-1. Clone Repository
-
-
-
+1. Clone the Repository
+Bash
 git clone https://github.com/YOUR_USERNAME/crypto-data-pipeline.git
-
 cd crypto-data-pipeline
-
-
-
----
-
-
-
 2. Configure Environment
-
-
-
+Bash
 cp .env.example .env
-
-
-
-Update database credentials if needed.
-
-
-
----
-
-
+Note: Open .env and update your database credentials if necessary.
 
 3. Start Docker Services
-
-
-
+Bash
 docker compose up -d --build
-
-
-
----
-
-
-
-4. Run ETL Pipeline
-
-
-
+4. Run the ETL Pipeline
+Bash
 docker exec -it crypto_app python scripts/main.py
-
-
-
----
-
-
-
 🗄️ Database Schema
-
-
-
 Table: crypto_prices
-
-
-
-Column| Type| Description
-
-coin| TEXT| Cryptocurrency name
-
-price_usd| FLOAT| Price in USD
-
-extracted_at| TIMESTAMP| Extraction timestamp
-
-
-
----
-
-
-
+Column	Type	Description
+coin	TEXT	Cryptocurrency name (e.g., Bitcoin)
+price_usd	FLOAT	Current price in USD
+extracted_at	TIMESTAMP	Execution timestamp
 🔍 Data Verification
-
-
+To verify the data directly inside the container:
 
 Access PostgreSQL:
 
-
-
+Bash
 docker exec -it crypto_postgres psql -U postgres -d crypto_db
+Run Query:
 
-
-
-Run query:
-
-
-
+SQL
 SELECT * FROM crypto_prices LIMIT 10;
-
-
-
----
-
-
-
-📜 Logging & Debugging
-
-
-
-The pipeline provides basic logging for each stage:
-
-
-
-[INFO] Extracted data from API
-
-[INFO] Transformed data successfully
-
-[INFO] Loaded data into PostgreSQL
-
-
-
-Check container logs:
-
-
-
-docker compose logs -f
-
-
-
----
-
-
-
-🧰 Common Operations
-
-
-
-Stop containers:
-
-
-
-docker compose down
-
-
-
-Remove volumes:
-
-
-
-docker compose down -v
-
-
-
-Rebuild containers:
-
-
-
-docker compose up -d --build
-
-
----
-
-
 🚀 Future Improvements
+[ ] Orchestration: Integrate Apache Airflow for automated scheduling.
 
+[ ] Cloud Storage: Add a stage to store raw JSON data in AWS S3 (Data Lake).
 
+[ ] Monitoring: Build a dashboard using Streamlit or Grafana.
 
-- Add orchestration with Apache Airflow
-
-- Implement retry and error handling mechanisms
-
-- Store raw data in AWS S3
-
-- Add scheduling (daily batch pipeline)
-
-- Build monitoring dashboards (Streamlit / BI tools)
-
-
----
-
+[ ] Resilience: Implement advanced error handling and Slack/Email alerts.
 
 💡 Key Learnings
+Designing modular, maintainable ETL architectures.
 
+Managing relational schemas for time-series market data.
 
-
-- Designing modular ETL pipelines
-
-- Working with REST APIs and JSON data
-
-- Data trans
-
-
-
-formation using Pandas
-
-- PostgreSQL database integration
-
-- Docker-based development environments
-
----
-
-
+Containerizing multi-service applications for DevOps-ready deployments.
 
 👤 Author
-
-
-
 Atefeh Fahimirad
-
 Junior Data Engineer
 
+GitHub: https://github.com/YOUR_USERNAME
 
-
-GitHub: https://github.com/YOUR_USE…
+LinkedIn: [Your LinkedIn Profile Li
