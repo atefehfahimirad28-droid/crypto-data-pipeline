@@ -46,6 +46,7 @@ PostgreSQL (crypto_prices table)
 
 ---
 
+
 🐳 Docker Architecture
 
 The application runs in isolated containers:
@@ -64,6 +65,8 @@ Volumes:
 - Persistent storage for database data
 
 ---
+
+
 
 🔄 Data Pipeline Flow
 
@@ -84,6 +87,8 @@ Volumes:
 
 ---
 
+
+
 ## 📂 Project Structure
 
 ```bash
@@ -103,7 +108,10 @@ crypto-data-pipeline/
 ├── Dockerfile
 └── requirements.txt
 
+
 ---
+
+
 
 ⚙️ Setup & Execution
 
@@ -112,7 +120,9 @@ crypto-data-pipeline/
 git clone https://github.com/atefehfahimirad28-droid/crypto-data-pipeline.git
 cd crypto-data-pipeline
 
+
 ---
+
 
 2. Configure Environment
 
@@ -132,7 +142,11 @@ docker compose up -d --build
 
 docker exec -it crypto_app python scripts/main.py
 
+
+
 ---
+
+
 
 🗄️ Database Schema
 
@@ -142,7 +156,7 @@ Table: crypto_prices
 |--------------|----------|--------------------------|
 | coin         | TEXT     | Cryptocurrency name      |
 | price_usd    | FLOAT    | Price in USD             |
-| extracted_at | TIMESTAMP| Extraction timestamp     
+| extracted_at | TIMESTAMP| Extraction timestamp     |
 
 ---
 
@@ -156,7 +170,10 @@ Run query:
 
 SELECT * FROM crypto_prices LIMIT 10;
 
+
 ---
+
+
 
 📜 Logging & Debugging
 
@@ -170,7 +187,10 @@ Check container logs:
 
 docker compose logs -f
 
+
 ---
+
+
 
 🧰 Common Operations
 
@@ -186,7 +206,10 @@ Rebuild containers:
 
 docker compose up -d --build
 
+
 ---
+
+
 
 🚀 Future Improvements
 
@@ -196,7 +219,9 @@ docker compose up -d --build
 - Add scheduling (daily batch pipeline)
 - Build monitoring dashboards (Streamlit / BI tools)
 
+
 ---
+
 
 💡 Key Learnings
 
@@ -206,9 +231,13 @@ docker compose up -d --build
 - PostgreSQL database integration
 - Docker-based development environments
 
+
 ---
+
 
 👤 Author
 
 Atefeh Fahimirad
 Junior Data Engineer
+
+GitHub: https://github.com/atefehfahimirad28-droid
