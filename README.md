@@ -1,8 +1,11 @@
 🚀 Crypto Data Pipeline (ETL with Docker & PostgreSQL)
 
 "Python" (https://img.shields.io/badge/python-3.9+-blue.svg)
+
 "Docker" (https://img.shields.io/badge/docker-%230db7ed.svg)
+
 "PostgreSQL" (https://img.shields.io/badge/PostgreSQL-316192.svg)
+
 "Pandas" (https://img.shields.io/badge/pandas-%23150458.svg)
 
 ---
