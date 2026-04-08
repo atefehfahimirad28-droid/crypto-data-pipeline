@@ -138,10 +138,11 @@ docker exec -it crypto_app python scripts/main.py
 
 Table: crypto_prices
 
-Column| Type| Description
-coin| TEXT| Cryptocurrency name
-price_usd| FLOAT| Price in USD
-extracted_at| TIMESTAMP| Extraction timestamp
+| Column       | Type     | Description              |
+|--------------|----------|--------------------------|
+| coin         | TEXT     | Cryptocurrency name      |
+| price_usd    | FLOAT    | Price in USD             |
+| extracted_at | TIMESTAMP| Extraction timestamp     
 
 ---
 
