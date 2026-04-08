@@ -78,17 +78,20 @@ Volumes:
    - Ensure consistent schema
 
 ---
+## 📂 Project Structure
 
-📂 Project Structure
-
+```bash
 crypto-data-pipeline/
+│
 ├── scripts/
 │   ├── extract.py
 │   ├── transform.py
 │   ├── load.py
 │   └── main.py
+│
 ├── config/
 │   └── db_config.py
+│
 ├── .env.example
 ├── docker-compose.yml
 ├── Dockerfile
