@@ -1,5 +1,5 @@
 
- Crypto Data Pipeline (ETL with Docker & PostgreSQL)
+ 🚀 Crypto Data Pipeline (ETL with Docker & PostgreSQL)
 
 "Python" (https://img.shields.io/badge/python-3.9+-blue.svg)
 "Docker" (https://img.shields.io/badge/docker-%230db7ed.svg)
@@ -100,7 +100,7 @@ crypto-data-pipeline/
 
 1. Clone Repository
 
-git clone https://github.com/YOUR_USERNAME/crypto-data-pipeline.git
+git clone https:/atefehfahimirad28-droid/github.com//crypto-data-pipeline.git
 cd crypto-data-pipeline
 
 ---
