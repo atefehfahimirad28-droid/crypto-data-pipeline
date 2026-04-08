@@ -1,107 +1,207 @@
-Crypto Data Pipeline (ETL with Docker & PostgreSQL)
+🚀 Crypto Data Pipeline (ETL with Docker & PostgreSQL)
+
+"Python" (https://img.shields.io/badge/python-3.9+-blue.svg)
+"Docker" (https://img.shields.io/badge/docker-%230db7ed.svg)
+"PostgreSQL" (https://img.shields.io/badge/PostgreSQL-316192.svg)
+"Pandas" (https://img.shields.io/badge/pandas-%23150458.svg)
+
+---
+
 📌 Overview
-This project implements a modular ETL (Extract, Transform, Load) pipeline for collecting real-time cryptocurrency market data from the CoinGecko API and storing it in a PostgreSQL database.
+
+This project implements a modular ETL (Extract, Transform, Load) pipeline for collecting cryptocurrency market data from the CoinGecko API and storing it in a PostgreSQL database.
 
 The pipeline is designed with a data engineering mindset, focusing on clean architecture, reproducibility, and containerized execution using Docker.
 
+---
+
 🧠 Key Features
-Modular ETL Pipeline: Clear separation between Extraction, Transformation, and Loading logic.
 
-API Ingestion: Real-time data fetching using Python Requests.
+- Modular ETL pipeline (Extract / Transform / Load separation)
+- API data ingestion using Python (Requests)
+- Data cleaning and transformation with Pandas
+- Relational storage in PostgreSQL
+- Fully containerized environment using Docker Compose
+- Configurable environment using ".env"
 
-Data Processing: Cleaning and normalization using Pandas.
-
-Relational Storage: Structured data storage in PostgreSQL.
-
-Containerization: Fully orchestrated environment using Docker Compose.
-
-Security: Configurable environment variables via .env files.
+---
 
 🏗️ System Architecture
+
 The pipeline follows a structured batch-processing workflow:
 
-Extract: Fetch cryptocurrency data from CoinGecko API (JSON format).
+CoinGecko API
+      ↓
+Extract (Python + Requests)
+      ↓
+Transform (Pandas)
+      ↓
+Load (PostgreSQL)
 
-Transform: Normalize data, handle missing values, and structure it into tabular format using Pandas.
-
-Load: Upsert/Insert data into the PostgreSQL crypto_prices table.
+---
 
 🐳 Docker Architecture
-The application runs in isolated containers within a shared bridge network:
 
-crypto_app: The Python environment that executes the ETL scripts.
+The application runs in isolated containers:
 
-crypto_postgres: The database engine for persistent storage.
+Services:
 
-Volumes: Dedicated Docker volumes to ensure data persists even after container restarts.
+- "crypto_app" → Executes ETL pipeline
+- "crypto_postgres" → PostgreSQL database
 
-📂 Project Structure
-Plaintext
+Network:
+
+- Bridge network for inter-container communication
+
+Volumes:
+
+- Persistent storage for database data
+
+---
+
+🔄 Data Pipeline Flow
+
+1. Extract
+   
+   - Fetch cryptocurrency data from CoinGecko API
+   - Handle API responses (JSON format)
+
+2. Transform
+   
+   - Normalize and clean data
+   - Convert into structured tabular format
+
+3. Load
+   
+   - Insert data into PostgreSQL table
+   - Ensure consistent schema
+
+---
+
+## 📂 Project Structure
+
+```bash
 crypto-data-pipeline/
+│
 ├── scripts/
-│   ├── extract.py      # API fetching logic
-│   ├── transform.py    # Data cleaning & Pandas logic
-│   ├── load.py         # Database insertion logic
-│   └── main.py         # Pipeline orchestrator
+│   ├── extract.py
+│   ├── transform.py
+│   ├── load.py
+│   └── main.py
+│
 ├── config/
-│   └── db_config.py    # Database connection settings
-├── .env.example        # Template for environment variables
-├── docker-compose.yml  # Docker services configuration
-├── Dockerfile          # Python environment definition
-└── requirements.txt    # Python dependencies
+│   └── db_config.py
+│
+├── .env.example
+├── docker-compose.yml
+├── Dockerfile
+└── requirements.txt
+
+---
+
 ⚙️ Setup & Execution
-1. Clone the Repository
-Bash
+
+1. Clone Repository
+
 git clone https://github.com/YOUR_USERNAME/crypto-data-pipeline.git
 cd crypto-data-pipeline
+
+---
+
 2. Configure Environment
-Bash
+
 cp .env.example .env
-Note: Open .env and update your database credentials if necessary.
+
+Update database credentials if needed.
+
+---
 
 3. Start Docker Services
-Bash
+
 docker compose up -d --build
-4. Run the ETL Pipeline
-Bash
+
+---
+
+4. Run ETL Pipeline
+
 docker exec -it crypto_app python scripts/main.py
+
+---
+
 🗄️ Database Schema
+
 Table: crypto_prices
-Column	Type	Description
-coin	TEXT	Cryptocurrency name (e.g., Bitcoin)
-price_usd	FLOAT	Current price in USD
-extracted_at	TIMESTAMP	Execution timestamp
+
+Column| Type| Description
+coin| TEXT| Cryptocurrency name
+price_usd| FLOAT| Price in USD
+extracted_at| TIMESTAMP| Extraction timestamp
+
+---
+
 🔍 Data Verification
-To verify the data directly inside the container:
 
 Access PostgreSQL:
 
-Bash
 docker exec -it crypto_postgres psql -U postgres -d crypto_db
-Run Query:
 
-SQL
+Run query:
+
 SELECT * FROM crypto_prices LIMIT 10;
+
+---
+
+📜 Logging & Debugging
+
+The pipeline provides basic logging for each stage:
+
+[INFO] Extracted data from API
+[INFO] Transformed data successfully
+[INFO] Loaded data into PostgreSQL
+
+Check container logs:
+
+docker compose logs -f
+
+---
+
+🧰 Common Operations
+
+Stop containers:
+
+docker compose down
+
+Remove volumes:
+
+docker compose down -v
+
+Rebuild containers:
+
+docker compose up -d --build
+
+---
+
 🚀 Future Improvements
-[ ] Orchestration: Integrate Apache Airflow for automated scheduling.
 
-[ ] Cloud Storage: Add a stage to store raw JSON data in AWS S3 (Data Lake).
+- Add orchestration with Apache Airflow
+- Implement retry and error handling mechanisms
+- Store raw data in AWS S3
+- Add scheduling (daily batch pipeline)
+- Build monitoring dashboards (Streamlit / BI tools)
 
-[ ] Monitoring: Build a dashboard using Streamlit or Grafana.
-
-[ ] Resilience: Implement advanced error handling and Slack/Email alerts.
+---
 
 💡 Key Learnings
-Designing modular, maintainable ETL architectures.
 
-Managing relational schemas for time-series market data.
+- Designing modular ETL pipelines
+- Working with REST APIs and JSON data
+- Data transformation using Pandas
+- PostgreSQL database integration
+- Docker-based development environments
 
-Containerizing multi-service applications for DevOps-ready deployments.
+---
 
 👤 Author
+
 Atefeh Fahimirad
 Junior Data Engineer
-
-GitHub: https://github.com/YOUR_USERNAME
-
-LinkedIn: [Your LinkedIn Profile Li
