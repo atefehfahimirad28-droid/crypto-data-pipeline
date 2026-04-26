@@ -1,0 +1,70 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: crypto_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: crypto_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  airflow-init:
+    image: apache/airflow:2.9.1
+    container_name: airflow_init
+    depends_on:
+      - db
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./airflow/airflow.db:/opt/airflow/airflow.db
+    environment:
+      - AIRFLOW_CORE_EXECUTOR=SequentialExecutor
+      - AIRFLOW_DATABASE_SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
+    command: >
+      bash -c "airflow db init &&
+      airflow users create
+      --username admin
+      --password admin
+      --firstname admin
+      --lastname user
+      --role Admin
+      --email admin@example.com"
+
+  airflow-webserver:
+    image: apache/airflow:2.9.1
+    container_name: airflow_webserver
+    depends_on:
+      - airflow-init
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./airflow/airflow.db:/opt/airflow/airflow.db
+    environment:
+      - AIRFLOW_CORE_EXECUTOR=SequentialExecutor
+      - AIRFLOW_DATABASE_SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
+    command: webserver
+
+  airflow-scheduler:
+    image: apache/airflow:2.9.1
+    container_name: airflow_scheduler
+    depends_on:
+      - airflow-webserver
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./airflow/airflow.db:/opt/airflow/airflow.db
+    environment:
+      - AIRFLOW_CORE_EXECUTOR=SequentialExecutor
+      - AIRFLOW_DATABASE_SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
+    command: scheduler
+
+volumes:
+  postgres_data:

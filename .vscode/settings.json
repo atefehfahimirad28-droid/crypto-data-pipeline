@@ -1,0 +1,5 @@
+{
+  "powerquery.client.additionalSymbolsDirectories": [
+    "/home/dci-student/crypto-data-pipeline/.vscode/excel-pq-symbols"
+  ]
+}

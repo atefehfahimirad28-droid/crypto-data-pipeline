@@ -1,0 +1,25 @@
+2026-04-26 10:29:36,758 - INFO - Starting extract step
+2026-04-26 10:29:37,162 - INFO - Data extracted from API successfully
+2026-04-26 10:29:37,162 - INFO - Raw data saved to data/raw/crypto_prices.json
+2026-04-26 10:29:37,752 - INFO - Starting transform step
+2026-04-26 10:29:37,752 - INFO - Raw JSON file loaded
+2026-04-26 10:29:37,759 - INFO - Data transformed into DataFrame
+2026-04-26 10:29:37,761 - INFO - CSV file saved to data/processed/crypto_prices_processed.csv
+2026-04-26 10:33:39,595 - INFO - Starting load step
+2026-04-26 10:33:39,599 - ERROR - Error in load step: could not translate host name "db" to address: Temporary failure in name resolution
+
+2026-04-26 10:37:29,173 - INFO - Starting load step
+2026-04-26 10:37:29,201 - ERROR - Error in load step: connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  password authentication failed for user "postgres"
+
+2026-04-26 10:44:36,972 - INFO - Starting load step
+2026-04-26 10:44:36,990 - ERROR - Error in load step: connection to server at "localhost" (127.0.0.1), port 5433 failed: FATAL:  password authentication failed for user "postgres"
+
+2026-04-26 10:44:36,990 - INFO - Database connection closed
+2026-04-26 10:49:47,849 - INFO - Starting load step
+2026-04-26 10:49:47,861 - ERROR - Error in load step: connection to server at "localhost" (127.0.0.1), port 5433 failed: FATAL:  password authentication failed for user "postgres"
+
+2026-04-26 10:49:47,861 - INFO - Database connection closed
+2026-04-26 10:55:40,687 - INFO - Starting load step
+2026-04-26 10:55:40,712 - INFO - Loaded 3 records into PostgreSQL
+2026-04-26 10:55:40,713 - INFO - Database connection closed
