@@ -162,6 +162,8 @@ or through Airflow DAG execution.
 | coin         | TEXT      | Cryptocurrency name      |
 | price_usd    | FLOAT     | Price in USD             |
 | extracted_at | TIMESTAMP | Extraction timestamp     |
+
+
 ---
 
 🔍 Data Verification
