@@ -217,3 +217,6 @@ Junior Data Engineer
 
 GitHub:
 https://github.com/atefehfahimirad28-droid
+
+LinkedIn:  
+https://www.linkedin.com/in/atefeh-fahimi-rad-472989345
