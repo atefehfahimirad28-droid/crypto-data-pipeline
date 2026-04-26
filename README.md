@@ -82,7 +82,7 @@ Query used:
 SELECT * FROM crypto_prices;
 
 
-
+---
 
 🐳 Docker Running Services
 The project runs in multiple Docker containers using Docker Compose.
@@ -94,7 +94,7 @@ Apache Airflow Webserver
 Apache Airflow Scheduler
 ETL Application Container
 
-
+---
 
 📂 Project Structure
 crypto-data-pipeline/
@@ -125,7 +125,7 @@ crypto-data-pipeline/
 ├── requirements.txt
 └── README.md
 
-
+---
 
 ⚙️ Setup & Execution
 
@@ -144,7 +144,7 @@ docker compose up -d --build
 4. Run ETL Pipeline
 python3 -m scripts.load_crypto
 or through Airflow DAG execution.
-
+---
 
 
 🗄 Database Schema
@@ -154,7 +154,7 @@ coin	TEXT	Cryptocurrency name
 price_usd	FLOAT	Price in USD
 extracted_at	TIMESTAMP	Extraction timestamp
 
-
+---
 
 🔍 Data Verification
 Access PostgreSQL:
@@ -165,7 +165,7 @@ Run query:
 
 SELECT * FROM crypto_prices;
 
-
+---
 
 📜 Logging & Debugging
 The pipeline provides logging for each stage:
@@ -178,7 +178,7 @@ Check logs:
 
 docker compose logs -f
 
-
+---
 
 🧰 Common Operations
 Stop containers
@@ -190,6 +190,7 @@ docker compose down -v
 Rebuild containers
 docker compose up -d --build
 
+---
 
 🚀 Future Improvements
 Add AWS S3 for raw data storage
@@ -198,6 +199,7 @@ Add CI/CD with GitHub Actions
 Build monitoring dashboards
 Add automated testing with pytest
 
+---
 
 💡 Key Learnings
 Designing modular ETL pipelines
@@ -207,6 +209,7 @@ PostgreSQL database integration
 Docker-based development environments
 Apache Airflow orchestration
 
+---
 
 👤 Author
 Atefeh Fahimirad
