@@ -154,12 +154,14 @@ or through Airflow DAG execution.
 ---
 
 🗄 Database Schema
-Table: crypto_prices
-Column	Type	Description
-coin	TEXT	Cryptocurrency name
-price_usd	FLOAT	Price in USD
-extracted_at	TIMESTAMP	Extraction timestamp
 
+### Table: crypto_prices
+
+| Column       | Type      | Description              |
+|--------------|-----------|--------------------------|
+| coin         | TEXT      | Cryptocurrency name      |
+| price_usd    | FLOAT     | Price in USD             |
+| extracted_at | TIMESTAMP | Extraction timestamp     |
 ---
 
 🔍 Data Verification
